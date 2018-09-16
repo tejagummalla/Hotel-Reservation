@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -21,6 +22,9 @@ public class ReservatioEntity {
 	
 	@NotNull
 	private LocalDate checkOut;
+	
+	@ManyToOne
+	private RoomEntity roomEntity;
 	
 	public ReservatioEntity() {
 		super();
@@ -54,6 +58,16 @@ public class ReservatioEntity {
 
 	public void setCheckOut(LocalDate checkOut) {
 		this.checkOut = checkOut;
+	}
+
+	public RoomEntity getRoomEntity() {
+		return roomEntity;
+	}
+
+	public void setRoomEntity(RoomEntity roomEntity) {
+		this.roomEntity = roomEntity;
 	}	
+	
+	
 	
 }

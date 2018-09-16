@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup} from '@angular/forms';
+import {Http, Response} from '@angular/http';
+import {Observable} from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import { catchError } from 'rxjs/operators';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  
+        
+    constructor(private http:Http){}
+    private baseUrl:string = 'http://localhost:8080';
     public submitted:boolean;
     roomsearch : FormGroup;
     rooms: Room[];
@@ -17,14 +23,27 @@ export class AppComponent implements OnInit{
              checkOut: new FormControl('')
           });  
             
-            this.rooms = ROOMS;
          }
         onSubmit({value,valid}: {value:Roomsearch, valid:boolean}){
-            console.log(value)
+            this.getAll()
+            .subscribe(rooms => this.rooms = rooms,
+                err => {
+                    console.log(err);
+                    });
         }
         
         reserveRoom(id:string){
             console.log(id);
+        }
+    
+        getAll(): Observable<Room[]>{
+            return this.http.get(this.baseUrl + '/room/reservation/v1?checkIn=2017-03-17&checkOut=2017-03-19')
+            .map(this.mapRoom);    
+        }
+    
+        mapRoom(response:Response):Room[]{
+            console.log(response.json().content);
+            return response.json().content;
         }
     
 }
@@ -41,22 +60,4 @@ export class AppComponent implements OnInit{
         links:string;
      }
     
-    var ROOMS:Room[] = [
-    {
-            "id" : "1234",
-            "roomNumber": "409",
-            "price": "100",
-            "links":""
-    },
-    {
-            "id" : "2345",
-            "roomNumber": "419",
-            "price": "100",
-            "links":""
-    },
-    {
-            "id" : "3456",
-            "roomNumber": "429",
-            "price": "100",
-            "links":""
-    }]
+   
