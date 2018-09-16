@@ -1,48 +1,43 @@
 package com.reservation.hotel.hotelreservationspringangularapp.model.response;
 
-import com.reservation.hotel.hotelreservationspringangularapp.model.Links;
+import java.time.LocalDate;
 
 public class ReservationResponse {
 	
 	private Long id;
-	private Integer roomNumber;
-	private Integer price;
-	private Links links;
+	private LocalDate checkIn;
+	private LocalDate cheackOut;
 	
 	
-	public ReservationResponse(Integer roomNumber, Integer price) {
-		super();
-		this.roomNumber = roomNumber;
-		this.price = price;
-	}
 	
 	public ReservationResponse() {
 		super();
 	}
-	
+	public ReservationResponse(Long id, LocalDate checkIn, LocalDate cheackOut) {
+		super();
+		this.id = id;
+		this.checkIn = checkIn;
+		this.cheackOut = cheackOut;
+	}
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Integer getRoomNumber() {
-		return roomNumber;
+	public LocalDate getCheckIn() {
+		return checkIn;
 	}
-	public void setRoomNumber(Integer roomNumber) {
-		this.roomNumber = roomNumber;
+	public void setCheckIn(LocalDate checkIn) {
+		this.checkIn = checkIn;
 	}
-	public Integer getPrice() {
-		return price;
+	public LocalDate getCheackOut() {
+		return cheackOut;
 	}
-	public void setPrice(Integer price) {
-		this.price = price;
-	}
-	public Links getLinks() {
-		return links;
-	}
-	public void setLinks(Links links) {
-		this.links = links;
+	public void setCheackOut(LocalDate cheackOut) {
+		this.cheackOut = cheackOut;
 	}
 	
+	
+
 }
